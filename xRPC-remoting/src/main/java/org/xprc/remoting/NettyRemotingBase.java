@@ -160,6 +160,12 @@ public abstract class NettyRemotingBase {
 		}
 	}
 
+	/**
+	 * 通过注册的process解决问题
+	 * 
+	 * @param ctx
+	 * @param remotingTransporter
+	 */
 	protected void processRemotingRequest(final ChannelHandlerContext ctx,
 			final RemotingTransporter remotingTransporter) {
 		final Pair<NettyRequestProcessor, ExecutorService> matchedPair = this.processorTable

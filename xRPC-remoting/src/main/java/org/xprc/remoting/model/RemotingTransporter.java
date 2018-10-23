@@ -99,7 +99,7 @@ public class RemotingTransporter extends ByteHolder {
 
 	@Override
 	public String toString() {
-		return "RemotingTransporter [code=" + code + ", customHeader=" + customHeader + ", timestamp=" + timestamp
+		return ">>>>>>>>>>>>>>>RemotingTransporter [code=" + code + ", customHeader=" + customHeader + ", timestamp=" + timestamp
 				+ ", opaque=" + opaque + ", transporterType=" + transporterType + "]";
 	}
 

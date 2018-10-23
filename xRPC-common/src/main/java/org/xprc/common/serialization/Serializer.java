@@ -18,4 +18,6 @@ public interface Serializer {
 	 * @return
 	 */
 	<T> T readObject(byte[] bytes, Class<T> clazz);
+	
+	
 }
