@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xprc.client.annotation.RPCService;
+import org.xprc.client.provider.flow.control.ServiceFlowControllerManager;
 import org.xprc.client.provider.interceptor.ProviderProxyHandler;
 import org.xprc.client.provider.model.ServiceWrapper;
 import org.xprc.common.exception.rpc.RpcWrapperException;
@@ -136,13 +137,12 @@ public class LocalServerWrapperManager {
 							// 每分钟调用的最大调用次数
 							Long maxCallCount = rpcService.maxCallCountInMinute();
 							if (maxCallCount <= 0) {
-								// throw new RpcWrapperException("max call count
-								// must over zero at unit time");
+								throw new RpcWrapperException("max call count must over zero at unit time");
 							}
-//							ServiceFlowControllerManager serviceFlowControllerManager = providerController
-//									.getServiceFlowControllerManager();
-//							serviceFlowControllerManager.setServiceLimitVal(serviceName, maxCallCount);
-							
+							ServiceFlowControllerManager serviceFlowControllerManager = providerController
+									.getServiceFlowControllerManager();
+							serviceFlowControllerManager.setServiceLimitVal(serviceName, maxCallCount);
+
 							// 如果是支持服务降级服务，则需要根据降级方法的路径去创建这个实例，并编制proxy
 							if (isSupportDegradeService) {
 								Class<?> degradeClass = null;

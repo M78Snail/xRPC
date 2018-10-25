@@ -141,8 +141,8 @@ public class DefaultProvider implements Provider {
 			@Override
 			public void run() {
 				logger.info("ready prepare send Report");
-				// DefaultProvider.this.providerController.getServiceFlowControllerManager()
-				// .clearAllServiceNextMinuteCallCount();
+				DefaultProvider.this.providerController.getServiceFlowControllerManager()
+						.clearAllServiceNextMinuteCallCount();
 			}
 		}, 5, 45, TimeUnit.SECONDS);
 

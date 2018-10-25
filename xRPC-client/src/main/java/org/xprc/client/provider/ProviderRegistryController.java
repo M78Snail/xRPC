@@ -2,8 +2,10 @@ package org.xprc.client.provider;
 
 import java.util.List;
 
+import org.xprc.client.metrics.ServiceMeterManager;
 import org.xprc.client.provider.DefaultServiceProviderContainer.CurrentServiceState;
 import org.xprc.client.provider.flow.control.ServiceFlowControllerManager;
+import org.xprc.client.provider.model.ServiceWrapper;
 import org.xprc.common.utils.Pair;
 
 public class ProviderRegistryController {
@@ -50,19 +52,17 @@ public class ProviderRegistryController {
 				// 最低成功率
 				Integer minSuccessRate = pair.getValue().getMinSuccecssRate();
 				// 调用的实际成功率
-				// Integer realSuccessRate =
-				// ServiceMeterManager.calcServiceSuccessRate(serviceName);
+				Integer realSuccessRate = ServiceMeterManager.calcServiceSuccessRate(serviceName);
 
-				// if (minSuccessRate > realSuccessRate) {
-				//
-				// final Pair<CurrentServiceState, ServiceWrapper> _pair =
-				// this.defaultProvider.getProviderController().getProviderContainer()
-				// .lookupService(serviceName);
-				// CurrentServiceState currentServiceState = _pair.getKey();
-				// if (!currentServiceState.getHasDegrade().get()) {
-				// currentServiceState.getHasDegrade().set(true);
-				// }
-				// }
+				if (minSuccessRate > realSuccessRate) {
+
+					final Pair<CurrentServiceState, ServiceWrapper> _pair = this.defaultProvider.getProviderController()
+							.getProviderContainer().lookupService(serviceName);
+					CurrentServiceState currentServiceState = _pair.getKey();
+					if (!currentServiceState.getHasDegrade().get()) {
+						currentServiceState.getHasDegrade().set(true);
+					}
+				}
 			}
 		}
 	}
