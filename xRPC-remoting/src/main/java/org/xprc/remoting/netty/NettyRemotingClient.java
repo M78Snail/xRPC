@@ -422,4 +422,8 @@ public class NettyRemotingClient extends NettyRemotingBase implements RemotingCl
 		}
 	}
 
+	public Bootstrap getBootstrap() {
+		return bootstrap;
+	}
+
 }
